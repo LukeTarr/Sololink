@@ -6,13 +6,17 @@ import {
   BrowserRouter as Router,
 } from 'react-router-dom';
 import Register from './components/Register';
+import Login from './components/Login';
 
 function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/Account">
+        <Route path="/Register">
           <Register />
+        </Route>
+        <Route path="/Login">
+          <Login />
         </Route>
         <Route path="/">
           <Home />

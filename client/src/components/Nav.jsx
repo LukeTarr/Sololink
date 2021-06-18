@@ -21,12 +21,12 @@ function Nav() {
               </Link>
             </li>
             <li>
-              <Link className="navLink" to="/Account">
+              <Link className="navLink" to="/Register">
                 Register
               </Link>
             </li>
             <li>
-              <Link className="navLink" to="/Account">
+              <Link className="navLink" to="/Login">
                 Login
               </Link>
             </li>
