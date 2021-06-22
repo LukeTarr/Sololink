@@ -7,7 +7,7 @@ function Login() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
 
-  function loginCall() {
+  async function loginCall() {
     if (email.length === 0) {
       setError('Email must be filled out');
     } else if (password.length === 0) {
@@ -15,6 +15,27 @@ function Login() {
     } else {
       setError(null);
     }
+
+    const payload = {
+      email: email,
+      password: password
+    }
+
+    await fetch('http://localhost:5000/auth/login',{
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload)
+    } ).then(response => response.json())
+    .then(data => {
+      if(data.error) {
+        setError(data.error)
+        console.log(data.error)
+      } else {
+        setError("Should login")
+      }
+    });
   }
 
   return (

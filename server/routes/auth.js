@@ -27,7 +27,6 @@ router.post("/auth/register", async (req, res) => {
     res.send({ error: "Passwords don't match" });
     sent = true;
   }
-
   // if all the previous validation passed, check if the userName or email have been used in db yet
 
   if (!sent) {
@@ -54,6 +53,41 @@ router.post("/auth/register", async (req, res) => {
             res.send({ error: null });
           }
         });
+      }
+    });
+  }
+});
+
+router.post("/auth/login", async (req, res) => {
+  let sent = false;
+
+  if (req.body.email.length === 0) {
+    res.send({ error: "Email must be filled out" });
+    sent = true;
+  } else if (req.body.password.length === 0) {
+    res.send({ error: "Password must be filled out" });
+    sent = true;
+  }
+
+  if (!sent) {
+    User.findOne({ email: req.body.email }, async (err, doc) => {
+      if(doc){
+        console.log(doc.password);
+
+        bcrypt.compare(req.body.password, doc.password, function (err, result) {
+            if(err) {
+              console.log()
+            }
+
+            if(result) {
+              res.send({error: "Should Login"});
+            } else {
+              res.send({error: "Wrong password"});
+            }
+        });
+
+      } else {
+        res.send({error: "No user found with that username"})
       }
     });
   }
