@@ -14,25 +14,18 @@ router.post("/auth/register", async (req, res) => {
   // track if a response was sent yet
   let sent = false;
 
-  console.log(req.body);
-
-  //do the same validation as on client in-case of alternative client
-  if (req.body.userName.length === 0) {
-    res.send({ error: "Username must be filled out" });
-    sent = true;
-  } else if (req.body.email.length === 0) {
-    res.send({ error: "Email must be filled out" });
-    sent = true;
-  } else if (req.body.password1.length === 0) {
-    res.send({ error: "Password must be filled out" });
-    sent = true;
-  } else if (req.body.password2.length === 0) {
-    res.send({ error: "Re-enter password" });
-    sent = true;
-  } else if (req.body.password1 !== req.body.password2) {
-    res.send({ error: "Passwords don't match" });
+  if(!(req.body.email && req.body.userName && req.body.password1 && req.body.password2)) {
+    res.send({error: 'All fields must be field out'});
     sent = true;
   }
+
+  if(!sent) {
+    if (req.body.password1 !== req.body.password2) {
+      res.send({ error: "Passwords don't match" });
+      sent = true;
+  }
+}
+
   // if all the previous validation passed, check if the userName or email have been used in db yet
 
   if (!sent) {
@@ -67,11 +60,8 @@ router.post("/auth/register", async (req, res) => {
 router.post("/auth/login", async (req, res) => {
   let sent = false;
 
-  if (req.body.email.length === 0) {
-    res.send({ error: "Email must be filled out" });
-    sent = true;
-  } else if (req.body.password.length === 0) {
-    res.send({ error: "Password must be filled out" });
+  if(!(req.body.email && req.body.password)) {
+    res.send({error: 'All fields must be field out'});
     sent = true;
   }
 
