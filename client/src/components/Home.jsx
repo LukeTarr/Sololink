@@ -1,7 +1,9 @@
+import { useEffect, useState } from 'react';
 import Nav from '../components/Nav';
 import '../styles/home.css';
 
 function Home() {
+
   return (
     <>
       <Nav></Nav>

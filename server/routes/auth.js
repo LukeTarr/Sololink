@@ -1,8 +1,14 @@
 import express from "express";
 import bcrypt from "bcrypt";
 import { User } from "../models/users.js";
+import jwt from 'jsonwebtoken';
 
 const router = express.Router();
+
+
+function generateAccessToken(username) {
+  return jwt.sign(username, process.env.JWT_SECRET);
+}
 
 router.post("/auth/register", async (req, res) => {
   // track if a response was sent yet
@@ -72,22 +78,19 @@ router.post("/auth/login", async (req, res) => {
   if (!sent) {
     User.findOne({ email: req.body.email }, async (err, doc) => {
       if(doc){
-        console.log(doc.password);
-
         bcrypt.compare(req.body.password, doc.password, function (err, result) {
             if(err) {
-              console.log()
+              console.log(err)
             }
-
             if(result) {
-              res.send({error: "Should Login"});
+              const auth = generateAccessToken(doc.userName);
+              res.send({token: auth});
             } else {
               res.send({error: "Wrong password"});
             }
         });
-
       } else {
-        res.send({error: "No user found with that username"})
+        res.send({error: "No user found with that email"})
       }
     });
   }

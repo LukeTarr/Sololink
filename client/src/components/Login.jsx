@@ -1,11 +1,14 @@
 import Nav from './Nav';
 import '../styles/register.css';
 import { useState } from 'react';
+import {setAuthToken} from '../utils/authHelper';
+import { useHistory } from 'react-router-dom';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
+  const history = useHistory();
 
   async function loginCall() {
     if (email.length === 0) {
@@ -31,9 +34,13 @@ function Login() {
     .then(data => {
       if(data.error) {
         setError(data.error)
-        console.log(data.error)
       } else {
-        setError("Should login")
+        if(data.token) {
+          setAuthToken(data.token);
+          history.push('/');
+        } else {
+          setError("Token Error");
+        }
       }
     });
   }
