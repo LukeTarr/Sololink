@@ -12,7 +12,7 @@ export function logout() {
 }
 
 export function isLoggedIn() {
-    if(getAuthToken() !== ''){
+    if(getAuthToken() !== null){
         return true
     } else {
         return false;

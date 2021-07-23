@@ -1,6 +1,7 @@
 import '../styles/nav.css';
 import logo from '../sololink.svg';
 import { Link } from 'react-router-dom';
+import {isLoggedIn} from '../utils/authHelper';
 
 function Nav() {
   return (
@@ -20,6 +21,20 @@ function Nav() {
                 Home
               </Link>
             </li>
+            {isLoggedIn
+            ? <>
+            <li>
+              <Link className="navLink" to="/Account">
+                Account
+              </Link>
+            </li>
+            <li>
+              <Link className="navLink" to="/Logout">
+                Logout
+              </Link>
+            </li>
+            </>
+            : <>
             <li>
               <Link className="navLink" to="/Register">
                 Register
@@ -30,6 +45,9 @@ function Nav() {
                 Login
               </Link>
             </li>
+            </>
+           }
+            
           </ul>
         </nav>
       </header>
