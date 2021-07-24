@@ -1,9 +1,16 @@
 import '../styles/nav.css';
 import logo from '../sololink.svg';
 import { Link } from 'react-router-dom';
-import {isLoggedIn} from '../utils/authHelper';
+import {getAuthToken, isLoggedIn, logout} from '../utils/authHelper';
+import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+
 
 function Nav() {
+
+  const history = useHistory();
+  const [userLoggedIn, _setUserLoggedIn] = useState(isLoggedIn);
+
   return (
     <>
       <header>
@@ -21,7 +28,7 @@ function Nav() {
                 Home
               </Link>
             </li>
-            {isLoggedIn
+            {userLoggedIn
             ? <>
             <li>
               <Link className="navLink" to="/Account">
@@ -29,7 +36,10 @@ function Nav() {
               </Link>
             </li>
             <li>
-              <Link className="navLink" to="/Logout">
+              <Link className="navLink" onClick={() => {
+                logout();
+                history.push('/Login');
+              }}>
                 Logout
               </Link>
             </li>
@@ -47,7 +57,6 @@ function Nav() {
             </li>
             </>
            }
-            
           </ul>
         </nav>
       </header>

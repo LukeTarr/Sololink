@@ -36,6 +36,7 @@ function Login() {
         setError(data.error)
       } else {
         if(data.token) {
+          console.log("TOKEN FORM LOGIN", data.token)
           setAuthToken(data.token);
           history.push('/');
         } else {

@@ -2,6 +2,7 @@ import Nav from './Nav';
 import '../styles/register.css'
 import { useState } from 'react';
 import {useHistory} from 'react-router-dom';
+import { setAuthToken } from '../utils/authHelper';
 
 const Register = (props) => {
 
@@ -48,8 +49,13 @@ const Register = (props) => {
         setError(data.error)
         console.log(data.error)
       } else {
-        console.log("redirect should happen here")
-         history.push('/');
+        if(data.token){
+          setAuthToken(data.token)
+          history.push('/');
+        } else {
+          setError('Token Error');
+        }
+        
       }
     });
   }

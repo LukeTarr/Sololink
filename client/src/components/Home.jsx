@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
 import Nav from '../components/Nav';
 import '../styles/home.css';
+import { getAuthToken } from '../utils/authHelper';
 
 function Home() {
 
   return (
     <>
-      <Nav></Nav>
+      <Nav/>
 
       <div className="container">
         <div className="jumbo">

@@ -7,11 +7,15 @@ import {
 } from 'react-router-dom';
 import Register from './components/Register';
 import Login from './components/Login';
+import Account from './components/Account';
 
 function App() {
   return (
     <Router>
       <Switch>
+      <Route path="/Account">
+          <Account />
+        </Route>
         <Route path="/Register">
           <Register />
         </Route>
@@ -21,6 +25,7 @@ function App() {
         <Route path="/">
           <Home />
         </Route>
+       
       </Switch>
     </Router>
   );

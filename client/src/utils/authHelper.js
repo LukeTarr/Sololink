@@ -1,5 +1,7 @@
+export let isLoggedIn;
 
 export function setAuthToken(token) {
+    isLoggedIn = true;
     localStorage.setItem('token', token);
 }
 
@@ -8,13 +10,7 @@ export function getAuthToken() {
 }
 
 export function logout() {
+    isLoggedIn = false;
     localStorage.clear();
 }
 
-export function isLoggedIn() {
-    if(getAuthToken() !== null){
-        return true
-    } else {
-        return false;
-    }
-}
