@@ -5,6 +5,7 @@ import { config } from "dotenv";
 
 // Import my custom routers
 import { router as authRouter } from "./routes/auth.js";
+import { router as linkRouter } from "./routes/links.js";
 
 // Init the app and express with some setup
 const app = express();
@@ -37,3 +38,4 @@ mongoose.set("useFindAndModify", false);
 
 // Use the custom routers
 app.use(authRouter);
+app.use(linkRouter);

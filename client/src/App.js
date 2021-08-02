@@ -8,11 +8,15 @@ import {
 import Register from './components/Register';
 import Login from './components/Login';
 import Account from './components/Account';
+import Links from './components/Links'
 
 function App() {
   return (
     <Router>
       <Switch>
+      <Route path="/Links">
+          <Links />
+        </Route>
       <Route path="/Account">
           <Account />
         </Route>
