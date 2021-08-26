@@ -9,11 +9,15 @@ import Register from './components/Register';
 import Login from './components/Login';
 import Account from './components/Account';
 import Links from './components/Links'
+import Users from './components/Users'
 
 function App() {
   return (
     <Router>
       <Switch>
+      <Route path="/Users/:slug">
+          <Users />
+        </Route>
       <Route path="/Links">
           <Links />
         </Route>

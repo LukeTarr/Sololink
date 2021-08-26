@@ -1,11 +1,27 @@
 import express from "express";
-import bcrypt from "bcrypt";
 import { User } from "../models/users.js";
 import jwt from "jsonwebtoken";
 
 const router = express.Router();
 
-router.get('/Links', async (req, res) => {
+router.get('/users/:user', async (req, res) => {
+    let sent = false;
+    let user = req.params.user;
+
+
+
+    User.findOne({userName: user}, async (err, doc) => {
+        if (doc) {
+            const result = (({userName, links}) => ({userName, links}))(doc);
+            res.send({result});
+        } else {
+            res.send({error: "Failed to Authenticate"});
+            sent = true;
+        }
+    })
+});
+
+router.get('/links', async (req, res) => {
 
     let sent = false;
     let token = '';
@@ -31,12 +47,11 @@ router.get('/Links', async (req, res) => {
                 result = doc.links;
                 res.send(result);
             } else {
-                res.send({error: "Failed to Authenticate"})
+                res.send({error: "Failed to Authenticate"});
                 sent = true;
             }
         })
     }
-    
 });
 
 export { router };

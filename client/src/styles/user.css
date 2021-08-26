@@ -1,0 +1,31 @@
+.userImage {
+    margin-top: 25px;
+}
+
+.userContainer {
+    margin-top: 2%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.userBlock {
+    background-color: rgb(233,236,239);
+    min-height: 400px;
+    width: 70%;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    font-weight: 200;
+    flex-direction: column;
+}
+
+.userTitle {
+    border-bottom: 1px solid black;
+    width: 75%;
+    text-align: center;
+}
+
+.link {
+    margin-top: 10px;
+}

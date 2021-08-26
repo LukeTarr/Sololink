@@ -18,7 +18,7 @@ function Links() {
          fetch('http://localhost:5000/links',{
             method: 'GET',
             headers: {
-              'Content-Type': 'application/json',
+              'Accepts': 'application/json',
               'Authorization': `Bearer ${token}`,
             },
           } )
@@ -41,6 +41,7 @@ function Links() {
             <div className="jumbo">
                 <h1>Links</h1>
 
+
                 {error !== '' && 
                 <>
                 <h1 className={'error'}>{error}</h1>
@@ -48,8 +49,8 @@ function Links() {
                 }
 
                 {links.map(function(item, idx){
-                    return <a  key={idx} href={'https://'+ item.link}>{item.site}</a>
-                })}
+                    return <a  key={idx} href={'https://'+ item.link}>{item.site}</a>;
+                    })}
 
             </div>
         </div>
